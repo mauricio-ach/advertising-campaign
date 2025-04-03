@@ -41,7 +41,21 @@ const loginUser = async (req, res) => {
     }
 }
 
+const logOutUser = async (req, res) => {
+    try {
+        res.clearCookie('token');
+        return res.status(200).json({
+            message: 'User logged out',
+        });
+    } catch (error) {
+        res.status(500).json({
+            message: 'Internal server error',
+        })
+    }
+}
+
 module.exports = {
     createUser,
     loginUser,
+    logOutUser,
 }
