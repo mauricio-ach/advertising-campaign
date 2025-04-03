@@ -17,6 +17,35 @@ const createCampaign = async (req, res) => {
     }
 }
 
+const findAllCampaigns = async (req, res) => {
+    try {
+        const campaigns = await CampaignService.findAllCampaigns();
+        return res.status(200).json({
+            message: 'Campaigns found',
+            campaigns: campaigns,
+        })
+    } catch (error) {
+        res.status(500).json({
+            message: error.message,
+        });
+    }
+}
+
+const findAllCampaignsByStatus = async (req, res) => {
+    try {
+        const status = req.params.status;
+        const campaigns = await CampaignService.findAllCampaignsByStatus(status);
+        return res.status(200).json({
+            message: 'Campaigns found',
+            campaigns: campaigns,
+        })
+    } catch (error) {
+        res.status(500).json({
+            message: error.message,
+        });
+    }
+}
+
 const updateCampaign = async (req, res) => {
     try {
         const campaignId = req.params.campaign_id;
@@ -52,6 +81,8 @@ const deleteCampaign = async (req, res) => {
 
 module.exports = {
     createCampaign,
+    findAllCampaigns,
+    findAllCampaignsByStatus,
     updateCampaign,
     deleteCampaign,
 }

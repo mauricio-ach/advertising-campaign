@@ -6,6 +6,8 @@ const { checkSuperAdmin } = require('../middlewares/CheckAdmin');
 const router = express.Router();
 
 router.post('/', checkAuth, CampaignController.createCampaign);
+router.get('/all', checkAuth, CampaignController.findAllCampaigns);
+router.get('/status/:status', checkAuth, CampaignController.findAllCampaignsByStatus);
 router.patch('/:campaign_id', checkAuth, CampaignController.updateCampaign);
 router.delete('/:campaign_id', checkAuth, checkSuperAdmin, CampaignController.deleteCampaign);
 

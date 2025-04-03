@@ -6,6 +6,18 @@ class CampaignRepository {
         return await Campaign.create(campaignData);
     }
 
+    async findAll() {
+        return await Campaign.findAll();
+    }
+
+    async findAllByStatus(status) {
+        return await Campaign.findAll({
+            where: {
+                status: status,
+            }
+        })
+    }
+
     async findById(campaignId) {
         return await Campaign.findOne({
             where: {
