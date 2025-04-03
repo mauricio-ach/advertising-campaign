@@ -8,12 +8,14 @@ app.use(express.json());
 app.use(cookieParser());
 
 const UserRoutes = require('./src/routes/UserRoutes');
+const CampaignRoutes = require('./src/routes/CampaignRoutes');
 
 app.get('/', (req, res) => {
     res.send('Advertising Campaings API');
 });
 
 app.use('/users', UserRoutes);
+app.use('/campaigns', CampaignRoutes);
 
 app.use((req, res, next) => {
     res.status(404).json({
