@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
     user_id: DataTypes.INTEGER,
     title: DataTypes.STRING,
     description: DataTypes.TEXT,
-    status: DataTypes.ENUM,
+    status: DataTypes.ENUM('active', 'inactive', 'completed'),
     budget: DataTypes.DECIMAL,
     start: DataTypes.DATE,
     end: DataTypes.DATE
