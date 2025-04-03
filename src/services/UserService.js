@@ -27,8 +27,6 @@ class UserService {
             throw new Error('User already registered');
         }
 
-        userData.last_login = new Date();
-
         userData.isSuperAdming ? userData.roles = ["super_admin", "admin"] : userData.roles = ["admin"];
 
         const plainPassword = userData.password;
