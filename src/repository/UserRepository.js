@@ -13,6 +13,10 @@ class UserRepository {
             }
         });
     }
+
+    async saveUser(user) {
+        return await user.save();
+    }
 }
 
 module.exports = new UserRepository();
