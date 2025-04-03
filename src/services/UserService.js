@@ -69,6 +69,14 @@ class UserService {
 
         return token;
     }
+
+    async findAllUsers() {
+        const users = await UserRepository.findAll();
+        if (!users) {
+            throw new Error('No users found');
+        }
+        return users;
+    }
 }
 
 module.exports = new UserService();

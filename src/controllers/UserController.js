@@ -55,8 +55,23 @@ const logOutUser = async (req, res) => {
     }
 }
 
+const findAllUsers = async (req, res) => {
+    try {
+        const users = await UserService.findAllUsers();
+        return res.status(200).json({
+            message: 'Users found',
+            users: users,
+        })
+    } catch (error) {
+        res.status(500).json({
+            message: 'Internal server error',
+        })
+    }
+}
+
 module.exports = {
     createUser,
     loginUser,
     logOutUser,
+    findAllUsers,
 }
