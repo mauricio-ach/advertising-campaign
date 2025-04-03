@@ -36,7 +36,22 @@ const updateCampaign = async (req, res) => {
     }
 }
 
+const deleteCampaign = async (req, res) => {
+    try {
+        const campaignId = req.params.campaign_id;
+        await CampaignService.deleteCampaign(campaignId);
+        res.status(200).json({
+            message: 'Campaign deleted',
+        });
+    } catch (error) {
+        res.status(500).json({
+            message: error.message,
+        });
+    }
+}
+
 module.exports = {
     createCampaign,
     updateCampaign,
+    deleteCampaign,
 }

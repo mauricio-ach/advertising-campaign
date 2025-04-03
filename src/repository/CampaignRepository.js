@@ -17,6 +17,14 @@ class CampaignRepository {
     async saveCampaign(campaign) {
         return await campaign.save();
     }
+
+    async deleteCampaign(campaignId) {
+        return await Campaign.destroy({
+            where: {
+                id: campaignId,
+            }
+        });
+    }
 }
 
 module.exports = new CampaignRepository();
