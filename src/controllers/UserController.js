@@ -17,6 +17,7 @@ const createUser = async (req, res) => {
 const loginUser = async (req, res) => {
     try {
         const token = await UserService.loginUser(req.body);
+        console.log(token);
         if (token) {
             // Set the token in a cookie
             res.cookie('token', token, {

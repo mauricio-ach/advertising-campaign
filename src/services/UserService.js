@@ -29,11 +29,7 @@ class UserService {
 
         userData.last_login = new Date();
 
-        if (userData.isSuperAdmin) userData.roles = {
-            user: true,
-            admin: true,
-            super_admin: true,
-        };
+        userData.isSuperAdming ? userData.roles = ["super_admin", "admin"] : userData.roles = ["admin"];
 
         const plainPassword = userData.password;
         const salt = await bcrypt.genSalt(10);
@@ -66,17 +62,14 @@ class UserService {
         const token = jwt.sign({
             id: user.id,
             email: user.email,
-            roles: user.roles,
+            roles: JSON.parse(user.roles),
         }, JWT_SECRET);
 
         user.last_login = new Date();
 
         await UserRepository.saveUser(user);
 
-        return {
-            message: 'Login successful',
-            token: token,
-        };
+        return token;
     }
 }
 

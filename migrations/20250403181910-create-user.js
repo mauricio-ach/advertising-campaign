@@ -42,11 +42,6 @@ module.exports = {
       roles: {
         type: Sequelize.JSON,
         allowNull: false,
-        defaultValue: JSON.stringify({
-            user: true,
-            admin: true,
-            super_admin: false,
-        }),
         validate: {
             notEmpty: true,
         }
