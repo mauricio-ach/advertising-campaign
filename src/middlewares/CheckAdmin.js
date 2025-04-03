@@ -6,7 +6,6 @@ const checkSuperAdmin = (req, res, next) => {
         if (!isSuperAdmin) {
             return res.status(401).json({
                 message: 'Unauthorized',
-                error: 'User is not super admin',
             });
         }
         next();
