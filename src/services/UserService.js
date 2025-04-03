@@ -1,4 +1,5 @@
 const UserRepository = require('../repository/UserRepository');
+const bcrypt = require('bcrypt');
 
 class UserService {
     async createUser(userData) {
@@ -19,6 +20,11 @@ class UserService {
             throw new Error('Surname is required');
         }
 
+        const userRegistered = await UserRepository.findByEmail(userData.email);
+        if (userRegistered) {
+            throw new Error('User already registered');
+        }
+
         userData.last_login = new Date();
 
         if (userData.isSuperAdmin) userData.roles = {
@@ -27,10 +33,10 @@ class UserService {
             super_admin: true,
         };
 
-        const userRegistered = await UserRepository.findByEmail(userData.email);
-        if (userRegistered) {
-            throw new Error('User already registered');
-        }
+        const plainPassword = userData.password;
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(plainPassword, salt);
+        userData.password = hashedPassword;
 
         const user = await UserRepository.create(userData);
         return user;
