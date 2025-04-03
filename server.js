@@ -4,7 +4,14 @@ require('dotenv').config();
 
 
 const app = express();
-app.use(express.json());
+app.use(express.json(), (err, req, res, next) => {
+    if(err) {
+        return res.status(400).json({
+            message: 'Invalid JSON format',
+        });
+    }
+    next();
+});
 app.use(cookieParser());
 
 const UserRoutes = require('./src/routes/UserRoutes');

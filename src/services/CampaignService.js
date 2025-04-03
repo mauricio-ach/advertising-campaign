@@ -1,43 +1,25 @@
 const CampaignRepository = require('../repository/CampaignRepository');
-const {
-    checkNullValue,
-    checkEmptyValue,
-    checkDecimalValue,
-    checkStatusValue,
-} = require('../helpers/check-value');
+const { checkCampaign, checkCampaignUpdate } = require('../helpers/check-campaign');
 
 class CampaignService {
     
     async createCampaign(campaignData) {
-        if (checkNullValue(campaignData.title) || checkEmptyValue(campaignData.title)) {
-            throw new Error('Title is required');
-        }
-        if (checkNullValue(campaignData.description) || checkEmptyValue(campaignData.description)) {
-            throw new Error('Description is required');
-        }
-        if (checkNullValue(campaignData.start) || checkEmptyValue(campaignData.start)) {
-            throw new Error('Start date is required');
-        }
-        if (checkNullValue(campaignData.end) || checkEmptyValue(campaignData.end)) {
-            throw new Error('End date is required');
-        }
-        if (checkNullValue(campaignData.budget) || checkEmptyValue(campaignData.budget)) {
-            throw new Error('Budget is required');
-        }
-        if (!checkDecimalValue(campaignData.budget)) {
-            throw new Error('Budget must be a positive number');
-        }
-        if (checkNullValue(campaignData.status) || checkEmptyValue(campaignData.status)) {
-            throw new Error('Status is required');
-        }
-        if (!checkStatusValue(campaignData.status)) {
-            throw new Error('Status must be active, paused or completed');
-        }
-        if (checkNullValue(campaignData.user_id) || checkEmptyValue(campaignData.user_id)) {
-            throw new Error('User ID is required');
-        }
-
+        checkCampaign(campaignData);
         const campaign = await CampaignRepository.create(campaignData);
+        return campaign;
+    }
+
+    async updateCampaign(campaignId, campaignData) {
+        const campaign = await CampaignRepository.findById(campaignId);
+        if (!campaign) {
+            throw new Error('Campaign not found');
+        }
+        checkCampaignUpdate(campaignData);
+        Object.keys(campaignData).forEach((key) => {
+            campaign[key] = campaignData[key];
+        });
+
+        await CampaignRepository.saveCampaign(campaign);
         return campaign;
     }
 }

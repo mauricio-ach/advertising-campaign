@@ -6,12 +6,16 @@ class CampaignRepository {
         return await Campaign.create(campaignData);
     }
 
-    async updateCampaign(campaignId, campaignData) {
-        return await Campaign.update(campaignData, {
+    async findById(campaignId) {
+        return await Campaign.findOne({
             where: {
                 id: campaignId,
             }
         });
+    }
+
+    async saveCampaign(campaign) {
+        return await campaign.save();
     }
 }
 
