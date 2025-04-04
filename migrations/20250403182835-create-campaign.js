@@ -32,8 +32,10 @@ module.exports = {
       },
       description: {
         type: Sequelize.TEXT,
-        allowNull: true,
-        defaultValue: null,
+        allowNull: false,
+        validate: {
+            notEmpty: true,
+        }
       },
       status: {
         type: Sequelize.ENUM,
