@@ -6,6 +6,7 @@ const { checkSuperAdmin } = require('../middlewares/CheckAdmin');
 const router = express.Router();
 
 router.post('/', checkAuth, CampaignController.createCampaign);
+router.get('/:campaign_id', checkAuth, CampaignController.findCampaignById);
 router.get('/all', checkAuth, CampaignController.findAllCampaigns);
 router.get('/status/:status', checkAuth, CampaignController.findAllCampaignsByStatus);
 router.patch('/:campaign_id', checkAuth, CampaignController.updateCampaign);
