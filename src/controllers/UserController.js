@@ -1,4 +1,6 @@
 const UserService = require('../services/UserService');
+const jwt = require('jsonwebtoken');
+const JWT_SECRET = process.env.JWT_SECRET;
 
 const createUser = async (req, res) => {
     try {
@@ -69,9 +71,31 @@ const findAllUsers = async (req, res) => {
     }
 }
 
+const isAuthenticated = (req, res) => {
+    const token = req.cookies.token;
+
+    if (!token) {
+        return res.status(401).json({
+            isAuthenticated: false,
+        });
+    }
+
+    try {
+        jwt.verify(token, JWT_SECRET);
+        return res.status(200).json({
+            isAuthenticated: true,
+        });
+    } catch (error) {
+        return res.status(401).json({
+            isAuthenticated: false,
+        });
+    }
+}
+
 module.exports = {
     createUser,
     loginUser,
     logOutUser,
     findAllUsers,
+    isAuthenticated,
 }

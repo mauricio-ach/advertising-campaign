@@ -10,5 +10,6 @@ router.post('/admin', checkAuth, checkSuperAdmin, UserController.createUser);
 router.post('/login', UserController.loginUser);
 router.post('/logout', UserController.logOutUser);
 router.get('/all', checkAuth, checkSuperAdmin, UserController.findAllUsers);
+router.get('/check/auth', UserController.isAuthenticated);
 
 module.exports = router;
