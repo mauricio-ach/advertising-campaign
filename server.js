@@ -16,6 +16,7 @@ app.use(cookieParser());
 
 const UserRoutes = require('./src/routes/UserRoutes');
 const CampaignRoutes = require('./src/routes/CampaignRoutes');
+const DashboardRoutes = require('./src/routes/DashboardRoutes');
 
 app.get('/', (req, res) => {
     res.send('Advertising Campaings API');
@@ -23,6 +24,7 @@ app.get('/', (req, res) => {
 
 app.use('/users', UserRoutes);
 app.use('/campaigns', CampaignRoutes);
+app.use('/dashboard', DashboardRoutes);
 
 app.use((req, res, next) => {
     res.status(404).json({

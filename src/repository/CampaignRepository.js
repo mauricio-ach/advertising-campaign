@@ -30,6 +30,14 @@ class CampaignRepository {
         return await campaign.save();
     }
 
+    async getTotalCampaigns() {
+        return await Campaign.count();
+    }
+
+    async getTotalBudget() {
+        return await Campaign.sum('budget');
+    }
+
     async deleteCampaign(campaignId) {
         return await Campaign.destroy({
             where: {

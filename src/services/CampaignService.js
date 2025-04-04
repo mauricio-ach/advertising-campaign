@@ -17,6 +17,24 @@ class CampaignService {
         return campaigns;
     }
 
+    async getDashboardStats() {
+        const campaigns = await CampaignRepository.findAll();
+        
+        if (!campaigns) {
+            throw new Error('No campaigns found');
+        }
+
+        const totalCampaigns = await CampaignRepository.getTotalCampaigns();
+        const totalBudget = await CampaignRepository.getTotalBudget();
+        const campaignsByStatus = await this.groupCampaignsByStatus(campaigns);
+
+        return {
+            totalCampaigns,
+            totalBudget,
+            campaigns: campaignsByStatus,
+        }
+    }
+
     async findAllCampaignsByStatus(status) {
         const campaigns = await CampaignRepository.findAllByStatus(status);
         if (!campaigns) {
@@ -45,6 +63,18 @@ class CampaignService {
             throw new Error('Campaign not found');
         }
         await CampaignRepository.deleteCampaign(campaignId);
+    }
+
+    async groupCampaignsByStatus(campaigns) {
+        const groupedCampaigns = {};
+        campaigns.forEach(campaign => {
+            const status = campaign.status;
+            if (!groupedCampaigns[status]) {
+                groupedCampaigns[status] = [];
+            }
+            groupedCampaigns[status].push(campaign);
+        });
+        return groupedCampaigns;
     }
 }
 
