@@ -1,0 +1,323 @@
+{
+	"info": {
+		"_postman_id": "46750800-8c80-4e67-8ae4-ebbce60d109c",
+		"name": "Ad-Campaign-API",
+		"description": "Full Stack technical test: API REST to manage advertising campaigns",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "37638880"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Mauricio\",\n    \"last_name\": \"Araujo\",\n    \"email\": \"mauricio.araujoch@gmail.com\",\n    \"password\": \"tricky\",\n    \"isSuperAdmin\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/users/",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"mauricio.araujoch@gmail.com\",\n    \"password\": \"tricky\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/users/login",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "logout",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/users/logout",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create admin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Robert\",\n    \"last_name\": \"Smith\",\n    \"email\": \"rob.smith@gmail.com\",\n    \"password\": \"robsmith\",\n    \"isSuperAdmin\": false\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/users/admin",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users",
+								"admin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/users/all",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "check auth",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/users/check/auth",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users",
+								"check",
+								"auth"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "User's requests"
+		},
+		{
+			"name": "Campaign",
+			"item": [
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Book selling 4\",\n    \"description\": \"This campaign was started to show Facebook's ads\",\n    \"status\": \"completed\",\n    \"budget\": 1000,\n    \"start\": \"2025-04-03T15:00:00.000Z\",\n    \"end\": \"2025-04-23T15:00:00.000Z\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/campaigns/",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"campaigns",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Title updated\",\n    \"budget\": 8000\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/campaigns/1",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"campaigns",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/campaigns/1",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"campaigns",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/campaigns/all",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"campaigns",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all by status",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/campaigns/status/paused",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"campaigns",
+								"status",
+								"paused"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/campaigns/3",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"campaigns",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Campaign's requests"
+		},
+		{
+			"name": "Dashboard",
+			"item": [
+				{
+					"name": "get data",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/dashboard/",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"dashboard",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Dashboard requests"
+		}
+	]
+}

@@ -32,3 +32,121 @@
     ```
     npm run dev
     ```
+
+## Endpoints
+
+Los endpoint que reciben un payload debe estar en formato JSON como se explica a continuación, así mismo, si es necesario incluir parámetros deberán incluirse dentro de la url del endpoint.
+
+El uso del JWT es manejado por medio de cookies, por lo tanto, se debe configurar el servicio utilizado para que envíe las cookies junto con la solicitud. En el caso de Postman se hace de manera automática.
+
+- User
+    - GET
+        1. /users/all
+            
+            Devuelve la lista completa de todos los usuarios registrados.
+        
+        2. /users/check/auth
+
+            Verifica si el usuario contiene un token válido actualmente.
+    - POST
+        1. /users/
+
+            Crea un usuario de tipo administrador sin solicitar un token, útil para crear un primer usuario en la BD. El valor isSuperAdmin se utiliza para indicar si el usuario tiene privilegios elevados y debe ser asignado a true o false según sea el caso.
+
+            Payload con ejemplo de valores
+            ```
+            {
+                "name": "Robert",
+                "last_name": "Smith",
+                "email": "rob.smith@gmail.com",
+                "password": "robsmith",
+                "isSuperAdmin": false
+            }
+            ```
+
+        2. /users/admin
+
+            Crea un usuario de tipo administrador solicitando un token válido. El valor isSuperAdmin se utiliza para indicar si el usuario tiene privilegios elevados y debe ser asignado a true o false según sea el caso.
+
+            Payload con ejemplo de valores
+            ```
+            {
+                "name": "Robert",
+                "last_name": "Smith",
+                "email": "rob.smith@gmail.com",
+                "password": "robsmith",
+                "isSuperAdmin": false
+            }
+            ```
+        3. /users/logout
+
+            Cierra la sesión del usuario eliminando su token actual.
+
+        4. /users/login
+
+            Inicia sesión si los datos recibidos son válidos.
+            
+            Payload con ejemplo de valores
+            ```
+            {
+                "email": "rob.smith@gmail.com",
+                "password": "robsmith",
+            }
+            ```
+- Campaign
+    - GET
+        1. /campaigns/:campaign_id
+
+            Devuelve los datos de la campaña con el id asignado en el parámetro :campaign_id.
+        2. /campaigns/all
+
+            Devuelve la lista de todas las campañas registradas.
+
+        3. /campaigns/status/:status
+
+            Devuelve la lista de todas las campañas registradas que tengo el estado asignado en el parámetro :status. Status puede ser active, paused o completed.
+
+    - POST
+        1. /campaigns/
+
+            Crea una nueva campaña ,
+
+            Payload con ejemplo de valores
+            ```
+            {
+                "title": "Book selling 4",
+                "description": "This campaign was started to show Facebook's ads",
+                "status": "completed",
+                "budget": 1000,
+                "start": "2025-04-03T15:00:00.000Z",
+                "end": "2025-04-23T15:00:00.000Z"
+            }
+            ```
+    - DELETE
+        1. /campaigns/:campaign_id
+            
+            Elimina la campaña con el id asignado en el parámtero :campaign_id. El usuario debe proveer un token que avale que tiene privilegios elevados.
+    - PATCH
+        1. /campaigns/:campaign_id
+
+            Actualliza la campaña con el id asignado en el parámetro :campaign_id. Se debe establecer los valores que se requieren actualizar en el payload.
+
+            Payload con ejemplo de valores
+            ```
+            {
+                "title": "Title updated",
+                "budget": 8000
+            }
+            ``` 
+- Dashboard
+    - GET
+        1. /dashboard/
+
+            Devuelve un pequeño análisis de estadísticas sobre las campañas registradas brindando los siguientes datos
+            - Total de campañas
+            - Total de presupuesto invertido
+            - Campañas agrupadas por estado
+
+## Colección de Postman
+Dentro del repositorio se encuentra un archivo llamado **Ad-Campaign-API.postman_collection.json** que puede ser exportado para su uso con todos los endpoints descritos anteriormente.
+            
