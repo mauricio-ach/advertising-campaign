@@ -1,6 +1,6 @@
 {
   "name": "ad-campaign",
-  "version": "1.5.0",
+  "version": "1.6.0",
   "description": "Full Stack technical test: API REST to manage advertising campaigns",
   "main": "server.js",
   "scripts": {

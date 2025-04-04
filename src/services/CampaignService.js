@@ -9,6 +9,14 @@ class CampaignService {
         return campaign;
     }
 
+    async findCampaignById(campaign_id) {
+        const campaign = await CampaignRepository.findById(campaign_id);
+        if (!campaign) {
+            throw new Error('Campaign not found');
+        }
+        return campaign;
+    }
+
     async findAllCampaigns() {
         const campaigns = await CampaignRepository.findAll();
         if (!campaigns) {
